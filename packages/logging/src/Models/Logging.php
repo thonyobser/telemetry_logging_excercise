@@ -3,7 +3,7 @@
 namespace Logging\Src\Models;
 
 use Exception;
-use Logging\Src\Models\LoggingDrivers\LoggingDriver;
+use Logging\Src\Models\LoggingDrivers\LoggingDriverFactory;
 use Logging\Src\Models\LoggingDrivers\LoggingDriverInterface;
 
 class Logging
@@ -17,19 +17,19 @@ class Logging
     ];
 
     const drivers = [
-        'file',
+        'text',
         'cli',
         'csv'
     ];
 
     const useJsonFormatForAttributes = [
-        'file',
+        'text',
         'csv',
         'cli'
     ];
 
     const useStringForMessage = [
-        'file',
+        'text',
         'cli'
     ];
 
@@ -46,7 +46,7 @@ class Logging
             return;
         }
 
-        $this->loggingDriver = (new LoggingDriver(config('logging.driver')))->getLoggingDriver();
+        $this->loggingDriver = (new LoggingDriverFactory(config('logging.driver')))->getLoggingDriver();
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace Logging\Src\Models\LoggingDrivers;
 
-class LoggingDriver
+class LoggingDriverFactory
 {
     private LoggingDriverInterface $loggingDriver;
 
