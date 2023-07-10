@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Exception;
 use Illuminate\Console\Command;
 use Logger\Src\Models\LoggerDrivers\LoggerDriverFactory;
+use Logger\Src\Models\LoggerDrivers\LoggerDriverInterface;
 
 class TheZoo extends Command
 {
@@ -26,11 +27,8 @@ class TheZoo extends Command
      * Execute the console command.
      * @throws Exception
      */
-    public function handle(): void
+    public function handle(LoggerDriverInterface $logger): void
     {
-        /* @var \Logger\Src\Models\LoggerDrivers\LoggerDriverInterface $logger */
-        $logger = LoggerDriverFactory::create();
-
         $logId = 'zoo_log_' . date('d_m_y');
 
         $logger->info($logId, 'Initiate daily counting of zoo participants', [
