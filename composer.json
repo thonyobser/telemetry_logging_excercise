@@ -25,7 +25,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Logging\\Src\\": "packages/logging/src"
+            "Logger\\Src\\": "packages/logger/src"
         }
     },
     "autoload-dev": {

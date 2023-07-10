@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Exception;
 use Illuminate\Console\Command;
-use Logging\Src\Models\Logging;
+use Logger\Src\Models\LoggerDrivers\LoggerDriverFactory;
 
 class TheZoo extends Command
 {
@@ -26,15 +26,14 @@ class TheZoo extends Command
      * Execute the console command.
      * @throws Exception
      */
-    public function handle()
+    public function handle(): void
     {
-        $logging = new Logging();
+        /* @var \Logger\Src\Models\LoggerDrivers\LoggerDriverInterface $logger */
+        $logger = LoggerDriverFactory::create();
+
         $logId = 'zoo_log_' . date('d_m_y');
-        $zooKepperIsPresent = true;
 
-        $logging->log($logId, 'info', 'Initiate daily counting of zoo participants');
-
-        $logging->log($logId, 'info', 'Initiate daily counting of zoo participants', [
+        $logger->info($logId, 'Initiate daily counting of zoo participants', [
             'chimpanzees' => '4',
             'elephants' => '2',
             'lions' => '3',
@@ -42,25 +41,19 @@ class TheZoo extends Command
             'zookeeper' => '1'
         ]);
 
-        if (rand(0, 1) === 1) {
-            $logging->log($logId, 'warning', 'The zookeeper is not present');
-            $zooKepperIsPresent = false;
-        }
+        $logger->warning($logId, 'The zookeeper is not present');
 
-        $logging->log($logId, 'debug', 'one of the lions went missing', [
+        $logger->debug($logId, 'one of the lions went missing', [
             'lions' => '2'
         ]);
 
-        if ($zooKepperIsPresent === false) {
-            $logging->log($logId, 'error', 'The zookeeper is still not present');
-            $logging->log($logId, 'info', 'The zookeeper is back');
-        }
+        $logger->info($logId, 'The zookeeper is back');
 
-        $logging->log($logId, 'info', 'The Zookeeper found the missing lion', [
+        $logger->info($logId, 'The Zookeeper found the missing lion', [
             'lions' => '3'
         ]);
 
-        $logging->log($logId, 'error', 'The Lion just ate the Zookeeper', [
+        $logger->error($logId, 'The Lion just ate the Zookeeper', [
             'zookeeper' => '0'
         ]);
     }

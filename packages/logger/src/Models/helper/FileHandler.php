@@ -1,26 +1,26 @@
 <?php
 
-namespace Logging\Src\Models\LoggingDrivers\helper;
+namespace Logger\Src\Models\helper;
 
 class FileHandler
 {
-    private string|null $loggingPath = null;
+    private string|null $loggerPath = null;
     private string|null $fileName = null;
     private mixed $file = null;
 
     public function __construct($fileName)
     {
-        $this->loggingPath = config('logging.path');
+        $this->loggerPath = config('logger.path');
         $this->fileName = $fileName;
 
-        if (!file_exists($this->loggingPath)) {
-            mkdir($this->loggingPath, 0777, true);
+        if (!file_exists($this->loggerPath)) {
+            mkdir($this->loggerPath, 0777, true);
         }
     }
 
     public function open(): void
     {
-        $this->file = fopen($this->loggingPath . '/' . $this->fileName, 'a');
+        $this->file = fopen($this->loggerPath . '/' . $this->fileName, 'a');
     }
 
     public function close(): void

@@ -1,0 +1,5 @@
+Info: Initiate daily counting of zoo participants | {"chimpanzees":"4","elephants":"2","lions":"3","giraffes":"5","zookeeper":"1"}
+Warning: The zookeeper is not present | []
+Debug: one of the lions went missing | {"lions":"2"}
+Info: The Zookeeper found the missing lion | {"lions":"3"}
+Error: The Lion just ate the Zookeeper | {"zookeeper":"0"}
